@@ -30,5 +30,5 @@ This tiny application allow you to access version information of setup.py from _
 %license LICENSE
 %doc README.rst
 #{python_sitelib}/__pycache__/*
-#{python_sitelib}/validate_email.py
+%{python_sitelib}/app_version*
 #{python_sitelib}/validate_email-%{version}-py?.?.egg-info
