@@ -18,7 +18,7 @@ BuildRequires:  python3dist(sphinx)
 This tiny application allow you to access version information of setup.py from __init__.py
 
 %prep
-%autosetup -p1
+%autosetup -n app_version-%{version}
 
 %build
 %py_build
