@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.1
-Release:        2
+Release:        3
 Summary:        A tiny utility to get application version from pkg_resouces
 Group:          Development/Python
 License:        MIT
