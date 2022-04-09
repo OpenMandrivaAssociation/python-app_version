@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.1
-Release:        3
+Release:        4
 Summary:        A tiny utility to get application version from pkg_resouces
 Group:          Development/Python
 License:        MIT
@@ -12,6 +12,7 @@ BuildArch:      noarch
 
 BuildRequires:  python-devel
 BuildRequires:  python3dist(setuptools)
+BuildRequires:  python3dist(setuptools-scm)
 BuildRequires:  python3dist(sphinx)
 
 %description
