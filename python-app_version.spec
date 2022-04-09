@@ -14,6 +14,7 @@ BuildRequires:  python-devel
 BuildRequires:  python3dist(setuptools)
 BuildRequires:  python3dist(setuptools-scm)
 BuildRequires:  python3dist(sphinx)
+BuildRequires:  python3dist(pytest-runner)
 
 %description
 This tiny application allow you to access version information of setup.py from __init__.py
