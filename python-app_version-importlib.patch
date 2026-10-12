@@ -1,0 +1,50 @@
+setuptools 84 no longer ships pkg_resources, and pytest-runner is still
+built for Python 3.14. Read the installed version with importlib.
+--- a/setup.py
++++ b/setup.py
+@@ -48,7 +48,7 @@
+     zip_safe=True,
+     packages=find_packages('src'),
+     package_dir={'': 'src'},
+-    setup_requires=['setuptools_scm', 'pytest-runner'],
++    setup_requires=['setuptools_scm'],
+     tests_require=readlist('requirements-test.txt'),
+     install_requires=readlist('requirements.txt'),
+ )
+--- a/src/app_version/core.py
++++ b/src/app_version/core.py
+@@ -11,8 +11,8 @@
+ """
+ import os
+ import inspect
+-from pkg_resources import get_distribution
+-from pkg_resources import DistributionNotFound
++import importlib.metadata
++import importlib.util
+ 
+ __all__ = (
+     'get_string_version',
+@@ -66,15 +66,17 @@
+         callar = inspect.getouterframes(inspect.currentframe())[-1][1]
+     # get version info from distribution
+     try:
+-        di = get_distribution(name)
+-        installed_directory = os.path.join(di.location, name)
+-        if not callar.startswith(installed_directory) and not allow_ambiguous:
++        version = importlib.metadata.version(name)
++        spec = importlib.util.find_spec(name)
++        origin = spec.origin if spec and spec.origin else ""
++        installed_directory = os.path.dirname(origin)
++        if installed_directory and not callar.startswith(installed_directory) and not allow_ambiguous:
+             # not installed, but there is another version that *is*
+-            raise DistributionNotFound
+-    except DistributionNotFound:
++            raise importlib.metadata.PackageNotFoundError
++    except importlib.metadata.PackageNotFoundError:
+         return default
+     else:
+-        return di.version
++        return version
+ 
+ 
+ def get_tuple_version(name,
