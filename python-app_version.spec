@@ -19,7 +19,7 @@ BuildRequires:  python%{pyver}dist(setuptools-scm)
 Read an installed distribution's version from inside the package.
 
 %prep
-%autosetup -n app_version-%{version}
+%autosetup -p1 -n app_version-%{version}
 
 %build
 # The sdist is not a git checkout, so setuptools-scm needs the version.
